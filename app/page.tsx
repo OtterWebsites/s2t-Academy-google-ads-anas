@@ -1,112 +1,7 @@
-﻿"use client";
-
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-
-type DialogId = "delivery" | "privacy" | "terms" | "contact" | "imprint";
-
-const dialogContent: Record<DialogId, { title: string; body: React.ReactNode }> = {
-  delivery: {
-    title: "Telegram delivery is not connected yet.",
-    body: (
-      <p>
-        This design draft needs the verified S2TAcademy Telegram account URL. Once connected,
-        the button will open Telegram so you can request the ebook. A Telegram account is
-        required.
-      </p>
-    ),
-  },
-  privacy: {
-    title: "Privacy notice — draft",
-    body: (
-      <>
-        <p>
-          This draft has no lead form, analytics scripts or advertising tags. The Telegram
-          request link is not connected yet. Once connected, Telegram will process information
-          under its own privacy policy.
-        </p>
-        <p>
-          Before launch, the operator must provide a complete notice identifying the responsible
-          entity, hosting and Telegram data processing, purposes and lawful bases, retention,
-          applicable visitor rights and privacy contact.
-        </p>
-      </>
-    ),
-  },
-  terms: {
-    title: "Ebook terms — draft",
-    body: (
-      <>
-        <p>
-          All three ebooks are offered free of charge and will be delivered manually via
-          Telegram. They cover platform mechanics, chart patterns and a structured
-          risk-management overview, including example chart setups and educational material.
-          It is general education, not personalized financial advice; no outcome is guaranteed.
-        </p>
-        <p>
-          The legal operator, ebook usage permissions and any conditions of the free offer must
-          be confirmed before launch.
-        </p>
-      </>
-    ),
-  },
-  contact: {
-    title: "Contact information — pending",
-    body: (
-      <p>
-        Legal business name, physical business address, support email and verified Telegram
-        delivery account have not yet been supplied.
-      </p>
-    ),
-  },
-  imprint: {
-    title: "Imprint",
-    body: (
-      <>
-        <p>
-          [Legal entity name]
-          <br />
-          [Street address]
-          <br />
-          [Postal code, City, Country]
-        </p>
-        <p>Contact: [email address]</p>
-        <p>Responsible for content: [name]</p>
-      </>
-    ),
-  },
-};
-
-function Dialog({ id, onClose }: { id: DialogId; onClose: () => void }) {
-  const ref = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    ref.current?.showModal();
-  }, []);
-
-  const content = dialogContent[id];
-
-  return (
-    <dialog
-      ref={ref}
-      onClose={onClose}
-      onClick={(e) => {
-        if (e.target === ref.current) onClose();
-      }}
-    >
-      <h2>{content.title}</h2>
-      {content.body}
-      <button type="button" className="cta close" onClick={onClose}>
-        Close
-      </button>
-    </dialog>
-  );
-}
+﻿import Image from "next/image";
+import { TG_LINK } from "./constants";
 
 export default function Home() {
-  const [open, setOpen] = useState<DialogId | null>(null);
-  const openDialog = (id: DialogId) => () => setOpen(id);
-
   return (
     <>
       <div className="wrap">
@@ -120,14 +15,9 @@ export default function Home() {
           </a>
           <nav aria-label="Main navigation">
             <a href="#books">Explore the ebooks</a>
-            <button
-              type="button"
-              className="cta header-cta"
-              data-dialog="delivery"
-              onClick={openDialog("delivery")}
-            >
+            <a className="cta header-cta" data-dialog="delivery" href={TG_LINK} target="_blank" rel="noopener noreferrer">
               GET FREE EBOOKS
-            </button>
+            </a>
           </nav>
         </header>
 
@@ -143,14 +33,9 @@ export default function Home() {
               Explore platform controls, chart-pattern concepts and structured risk-management
               ideas in three illustrated ebooks.
             </p>
-            <button
-              type="button"
-              className="cta"
-              data-dialog="delivery"
-              onClick={openDialog("delivery")}
-            >
+            <a className="cta" data-dialog="delivery" href={TG_LINK} target="_blank" rel="noopener noreferrer">
               GET FREE EBOOKS
-            </button>
+            </a>
           </section>
 
           <figure className="showcase">
@@ -168,14 +53,9 @@ export default function Home() {
                 <br />
                 Risk-management overview.
               </p>
-              <button
-                type="button"
-                className="cta showcase-cta"
-                data-dialog="delivery"
-                onClick={openDialog("delivery")}
-              >
+              <a className="cta showcase-cta" data-dialog="delivery" href={TG_LINK} target="_blank" rel="noopener noreferrer">
                 GET FREE EBOOKS
-              </button>
+              </a>
             </div>
             <Image
               src="/assets/new/ebook-showcase-three.jpg"
@@ -309,14 +189,9 @@ export default function Home() {
                 manual; no response time is guaranteed.
               </p>
             </div>
-            <button
-              type="button"
-              className="cta"
-              data-dialog="delivery"
-              onClick={openDialog("delivery")}
-            >
+            <a className="cta" data-dialog="delivery" href={TG_LINK} target="_blank" rel="noopener noreferrer">
               GET FREE EBOOKS
-            </button>
+            </a>
           </section>
 
           <section className="faq" aria-label="Common questions">
@@ -348,38 +223,31 @@ export default function Home() {
         <footer>
           <span>S2TAcademy by Lennart</span>
           <div>
-            <button type="button" onClick={openDialog("privacy")}>
-              Privacy
-            </button>{" "}
+            <a href="/pdfs/legal-notice.pdf" target="_blank" rel="noopener noreferrer">
+              Legal Notice
+            </a>{" "}
             ·{" "}
-            <button type="button" onClick={openDialog("terms")}>
-              Terms
-            </button>{" "}
-            ·{" "}
-            <button type="button" onClick={openDialog("imprint")}>
+            <a href="/pdfs/imprint.pdf" target="_blank" rel="noopener noreferrer">
               Imprint
-            </button>{" "}
+            </a>{" "}
             ·{" "}
-            <button type="button" onClick={openDialog("contact")}>
-              Contact
-            </button>
+            <a href="/pdfs/risk-disclaimer.pdf" target="_blank" rel="noopener noreferrer">
+              Risk Disclaimer
+            </a>{" "}
+            ·{" "}
+            <a href="/pdfs/data-privacy.pdf" target="_blank" rel="noopener noreferrer">
+              Data Privacy
+            </a>
           </div>
         </footer>
       </div>
 
       <div className="mobile-action">
-        <button
-          type="button"
-          className="cta"
-          data-dialog="delivery"
-          onClick={openDialog("delivery")}
-        >
+        <a className="cta" data-dialog="delivery" href={TG_LINK} target="_blank" rel="noopener noreferrer">
           GET FREE EBOOKS
-        </button>
+        </a>
         <span>Three free PDFs · Request on Telegram</span>
       </div>
-
-      {open && <Dialog id={open} onClose={() => setOpen(null)} />}
     </>
   );
 }
