@@ -93,8 +93,8 @@ export default function Home() {
                 <Image
                   src="/assets/new/ebook-cover.jpg"
                   alt="Platform fundamentals ebook cover"
-                  width={1824}
-                  height={2362}
+                  width={105}
+                  height={136}
                   sizes="105px"
                 />
                 <div>
@@ -115,8 +115,8 @@ export default function Home() {
                 <Image
                   src="/assets/new/charts-cover.jpg"
                   alt="Chart Pattern Mastery ebook cover"
-                  width={1824}
-                  height={2362}
+                  width={105}
+                  height={136}
                   sizes="105px"
                 />
                 <div>
@@ -137,8 +137,8 @@ export default function Home() {
                 <Image
                   src="/assets/new/risk-cover.jpg"
                   alt="Risk Management Blueprint ebook cover"
-                  width={1824}
-                  height={2362}
+                  width={105}
+                  height={136}
                   sizes="105px"
                 />
                 <div>
