@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import { TG_LINK } from "./constants";
 
 export default function Home() {
@@ -58,11 +58,12 @@ export default function Home() {
               </a>
             </div>
             <Image
-              src="/assets/new/ebook-showcase-three.jpg"
+              src="/assets/new/ebook-showcase-three.png"
               alt="Studio display mockup of all three S2TAcademy ebooks"
-              width={2528}
-              height={1686}
-              sizes="(min-width: 740px) 800px, 100vw"
+              width={1536}
+              height={1024}
+              quality={100}
+              sizes="(min-width: 740px) 900px, 100vw"
             />
             <figcaption>
               Digital PDF ebooks. Book mockups are for display only; no printed books are
