@@ -247,7 +247,7 @@ export default function Home() {
         <a className="cta" data-dialog="delivery" href={TG_LINK} target="_blank" rel="noopener noreferrer">
           GET FREE EBOOKS
         </a>
-        <span>Three free PDFs · Request on Telegram</span>
+        <span>3 FREE EBOOKS - Request on Telegram</span>
       </div>
     </>
   );
